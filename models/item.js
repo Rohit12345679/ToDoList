@@ -3,6 +3,6 @@ const Schema=mongoose.Schema;
 const itemschema=new Schema({
     task:{
         type:String
-    },
-})
-module.exports = mongoose.model('item', itemschema)
+    }
+},{timestamps:true })
+module.exports = mongoose.model('Item', itemschema)
