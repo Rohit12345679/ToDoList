@@ -35,6 +35,17 @@ app.post('/',(req,res)=>{
     res.redirect("/") 
 })
 
+app.post("/delete",(req,res)=>{
+    const itemdelete=req.body.sm;
+    item.findByIdAndRemove(itemdelete,(err)=>{
+        if(!err)
+        {
+            res.redirect("/")
+        }
+    })
+})
+
+
 app.listen(PORT,()=>
 {
     console.log(`server is running this port ${PORT}`)

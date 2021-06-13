@@ -17,14 +17,14 @@ h1{
 }
 .box{
     margin: 30vh;
-    max-width: 500px;
+    max-width: 700px;
     width: 100%;
     background:#fff;
     border-radius: 5px;
     padding: 15px;
 }
 .inputField input{
-    width: 80%;
+    width: 70%;
     height: 40px;
     border: 1px solid #ccc;
     font-size: 17px;
@@ -38,7 +38,7 @@ h1{
     outline: none;
     background: #8E49E8;
     color: #fff;
-    font-size: 22px;
+    font-size: 18px;
     cursor: pointer;
     border-radius: 3px;
     margin-left: 5px;
@@ -52,49 +52,60 @@ h1{
 .box .todolist{
 
 max-height: 250px;
-overflow-y: auto;
+width: 635px;
+padding-left: 2px;
+
 }
 .todolist li{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-   grid-column-gap:100px;
+   grid-column-gap:140px;
     list-style: none;
     height: 45px;
-    width: 80%;
-    right: 0px;
-    text-align: center;
-    line-height: relative;
+    width: 90%;
+    font-size: 18px;
+    line-height: 30px;
     background: #f2f2f2;
     border-radius: 3px;
     margin-bottom: 8px;
+    padding-right: 1px;
+    padding-left: 18px;
 }
 .todolist .li span {
     position: absolute;
     right: 0px;
     color: #fff;
     width: 45px;
-    font-family: 'Times New Roman','bold';
     text-align: center;
     background: #e74c3c;
     border-radius: 0 3px 3px 0;
     cursor: pointer;
 }
+button{
+    background:gold;
+    height: 40px;
+    width: 60px;
+    border-radius: 5px;
+} 
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
      <div class="box">
-        <header>ToDay Task</header>
+        <header>ToDo List</header>
         <div class="inputField">
         <form action=" /" method="POST">
-         <input type="text" name="n" placeholder="new">
+         <input type="text" name="n" placeholder="Add New Task" required>
          <button type="submit" ><span>Add</span></button> 
      </form>
     </div>
     <ul class="todolist"> 
-        <% for(var i=0; i<newListItems.length;i++){ %>
-            <li><%= newListItems[i].task %><span><i class="fa fa-trash"></i></span></li>
-            <% } %>
+        <% newListItems.forEach(function(items){ %>
+            <li><%= items.task %><span > <%= items.createdAt.toISOString().slice(0,10) %></span>
+                <form action="/delete" method="POST">
+                <span><button type="submit"name="sm"value="<%=items._id %>"onChange="this.form.submit()"><i class="fa fa-trash"></i></button></span></form></li>
+            <% }); %>
         </ul> 
             
     </div>
